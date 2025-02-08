@@ -27,5 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/elgovanni/m8k:${{ github.ref_name }}
+          tags: |
+            ghcr.io/elgovanni/m8k:${{ github.ref_name }}
+            ghcr.io/elgovanni/m8k:latest
           platforms: linux/amd64,linux/arm64/v8
