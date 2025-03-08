@@ -21,13 +21,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Lowercase repo name for tag
+        run: echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/elgovanni/m8k:${{ github.ref_name }}
-            ghcr.io/elgovanni/m8k:latest
-          platforms: linux/amd64,linux/arm64/v8
+            ghcr.io/${{ REPO }}:${{ github.ref_name }}
+            ghcr.io/${{ REPO }}:latest
+          platforms: linux/amd64
